@@ -135,7 +135,7 @@
         </ul>
         {% endif %}
 
-        <form id="signupForm" action="{% url 'signup' %}" method="POST">
+        <form id="signupForm" action="{% url 'signup' %}" method="POST"enctype="multipart/form-data">
             {% csrf_token %}
 
             <!-- Step 1 -->
@@ -222,6 +222,13 @@
     </div>
 
     <script>
+        // Restrict Date of Birth to Past Dates
+window.addEventListener("DOMContentLoaded", function () {
+    const dobInput = document.getElementById("dob");
+    const today = new Date().toISOString().split("T")[0];
+    dobInput.setAttribute("max", today);
+});
+
         function goToStep(step) {
             document.querySelectorAll(".step").forEach((stepDiv, index) => {
                 stepDiv.classList.toggle("active", index + 1 === step);
